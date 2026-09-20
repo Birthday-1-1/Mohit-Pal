@@ -1,6 +1,34 @@
 const screens=[...document.querySelectorAll('.screen')];
 function show(id){screens.forEach(s=>s.classList.toggle('active',s.id===id||(id==='hero'&&s.classList.contains('hero'))));scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>show(b.dataset.next));
+document.querySelectorAll('[data-next]').forEach(b => {
+
+  b.onclick = () => {
+
+    // 🎉 Final birthday wish button
+    if (b.dataset.next === "finale") {
+
+      const celebration =
+        document.getElementById("celebrationOverlay");
+
+      celebration.classList.add("active");
+
+      setTimeout(() => {
+
+        celebration.classList.remove("active");
+
+        show("finale");
+
+      }, 2000);
+
+    } else {
+
+      show(b.dataset.next);
+
+    }
+
+  };
+
+});
 document.querySelectorAll('.reason').forEach(b=>b.onclick=()=>document.getElementById('reasonText').textContent=b.dataset.text);
 document.getElementById('replay').onclick=()=>show('hero');
 const box=document.getElementById('lightbox'),zoom=document.getElementById('zoom');
